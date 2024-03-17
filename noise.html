@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Canvas Grid with Animated Squares</title>
+		<style>
+			body,
+			html {
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				height: 100%;
+				background-color: black;
+			}
+
+			canvas {
+				display: block;
+				margin: auto;
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="myCanvas"></canvas>
+		<script>
+			// Obtener el elemento canvas y su contexto
+			var canvas = document.getElementById('myCanvas');
+			var ctx = canvas.getContext('2d');
+
+			// Función para dibujar el grid con cuadrados
+			function drawGrid() {
+				// Tamaño del canvas
+				canvas.width = window.innerWidth;
+				canvas.height = window.innerHeight;
+
+				// Tamaño máximo del cuadrado
+				var maxSize = 40;
+
+				// Calcular la cantidad de cuadrados en el eje horizontal y vertical
+				var numColumns = Math.floor(canvas.width / maxSize);
+				var numRows = Math.floor(canvas.height / maxSize);
+
+				// Calcular el tamaño real de los cuadrados
+				var actualSize = maxSize;
+
+				// Limpiar el canvas
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+				// Iterar sobre el grid
+				for (var i = 0; i < numColumns; i++) {
+					for (var j = 0; j < numRows; j++) {
+						// Calcular las coordenadas del cuadrado
+						var x = i * actualSize;
+						var y = j * actualSize;
+
+						// Calcular el color gris
+						var grayScale = Math.floor(Math.random() * 256);
+
+						// Dibujar el cuadrado
+						ctx.fillStyle =
+							'rgb(' + grayScale + ',' + grayScale + ',' + grayScale + ')';
+						ctx.fillRect(x, y, actualSize, actualSize);
+					}
+				}
+			}
+
+			// Iniciar la animación cada 2 segundos
+			setInterval(drawGrid, 100);
+
+			// Llamar a drawGrid una vez al principio para iniciar la animación
+			drawGrid();
+		</script>
+	</body>
+</html>
